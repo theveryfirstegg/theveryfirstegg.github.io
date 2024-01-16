@@ -1,10 +1,16 @@
 version: "3"
 
-services:
-  nodejs:
-    # fill out the configuration here
-    networks:
-      - app-network
+services: 
+  nodejs: 
+    build: 
+      context: . 
+      dockerfile: Dockerfile # Points to the Dockerfile
+    image: nodejs-app # Names the built image as 'nodejs-app'
+    container_name: nodejs # Sets the container's name to 'nodejs'
+    restart: unless-stopped # Configures the restart policy
+
+    networks: # Network configurations for this service
+      - app-network # Connects to the 'app-network' network
 
   # the nginx configuration is given below
   # the website will run on localhost:80
@@ -28,7 +34,7 @@ volumes:
     driver_opts:
       type: none
       # fill out your absolute path to your folder here
-      device: /absolute/path/to/web/template/folder
+      device: /Users/angelaandely/theveryfirstegg.github.io
       o: bind
 
 networks:
